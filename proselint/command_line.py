@@ -71,10 +71,9 @@ def lint(path, debug=False):
     errors = []
     with codecs.open(path, "r", encoding='utf-8') as f:
         text = f.read()
+
         errors = []
         for check in checks:
-            if debug:
-                print(check.__module__ + "." + check.__name__)
 
             result = check(text)
 
@@ -117,7 +116,6 @@ def timing_test(corpus="0.1.0"):
 
 def clear_cache():
     """Delete the contents of the cache."""
-    print("Deleting the cache...")
     subprocess.call("find . -name '*.pyc' -delete", shell=True)
     subprocess.call(
         "rm -rfv proselint/cache > /dev/null && mkdir -p {}".format(
